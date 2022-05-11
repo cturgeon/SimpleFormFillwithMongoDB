@@ -1,5 +1,7 @@
 import Head from "next/head";
 import { Fragment } from "react";
+import Link from "next/link";
+import Text from "next";
 import ButtonCard from "../components/button-card";
 
 export default function Home() {
@@ -25,6 +27,9 @@ export default function Home() {
           number={2}
           link="buttwo"
         />
+        <div>
+          <Link href="/modal">Go here to test the modal!</Link>
+        </div>
       </div>
     </Fragment>
   );
