@@ -1,7 +1,6 @@
 import Head from "next/head";
 import { Fragment } from "react";
 import Link from "next/link";
-import Text from "next";
 import ButtonCard from "../components/button-card";
 
 export default function Home() {

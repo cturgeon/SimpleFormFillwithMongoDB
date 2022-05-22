@@ -4,6 +4,7 @@ import {
   deleteFormData,
   getAllFormData,
   insertForm,
+  updateFormData,
 } from "../../lib/db";
 
 export default async function handler(req, res) {
@@ -28,6 +29,7 @@ export default async function handler(req, res) {
       title,
       description,
       value,
+      dataArray: [],
     };
 
     let result;
@@ -60,6 +62,31 @@ export default async function handler(req, res) {
       res.status(201).json({ message: "deleted form from database" });
     } catch (error) {
       res.status(500).json({ message: "could not delete form" });
+    }
+  }
+
+  if (req.method === "PUT") {
+    const id = req.body._id;
+    const { name, title, description, value, dataArray } = req.body;
+    const newForm = {
+      name,
+      title,
+      description,
+      value,
+      dataArray,
+    };
+    try {
+      const result = await updateFormData(
+        client,
+        "form-data",
+        { _id: ObjectId(id) },
+        newForm
+      );
+      res.status(201).json({ message: "updated form", message: result });
+    } catch (error) {
+      client.close();
+      res.status(500).json({ message: "could not update form" });
+      return;
     }
   }
 
